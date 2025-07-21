@@ -6,7 +6,7 @@ import WelcomeMessage from './components/WelcomeMessage';import Header from './c
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
-
+import Counter from './components/Counter';
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="App">
          <Header />
          <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
       <MainContent />
@@ -27,7 +27,8 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Welcome to my app!</h1>
+      <Counter />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
