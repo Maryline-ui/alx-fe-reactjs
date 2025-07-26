@@ -1,4 +1,3 @@
-// src/components/DeleteRecipeButton.jsx
 import { useRecipeStore } from './recipeStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ function DeleteRecipeButton({ id }) {
   };
 
   return (
-    <button onClick={handleDelete} style={{ color: 'red' }}>
+    <button onClick={handleDelete} style={{ marginLeft: '1rem', color: 'red' }}>
       Delete Recipe
     </button>
   );
