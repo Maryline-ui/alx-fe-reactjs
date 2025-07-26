@@ -1,58 +1,36 @@
-// src/components/EditRecipeForm.jsx
 import { useState } from 'react';
 import { useRecipeStore } from './recipeStore';
 import { useNavigate } from 'react-router-dom';
 
 function EditRecipeForm({ recipe }) {
-  const editRecipe = useRecipeStore((state) => state.editRecipe);
+  const [title, setTitle] = useState(recipe.title);
+  const [instructions, setInstructions] = useState(recipe.instructions);
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    id: recipe.id,
-    title: recipe.title,
-    ingredients: recipe.ingredients,
-    instructions: recipe.instructions,
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editRecipe(formData);
-    navigate(`/recipe/${recipe.id}`);
+    updateRecipe({ ...recipe, title, instructions });
+    navigate('/');
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Edit Recipe</h3>
+      <h2>Edit Recipe</h2>
       <input
-        name="title"
-        value={formData.title}
-        onChange={handleChange}
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
         required
       />
       <textarea
-        name="ingredients"
-        value={formData.ingredients}
-        onChange={handleChange}
-        placeholder="Ingredients"
-        required
-      />
-      <textarea
-        name="instructions"
-        value={formData.instructions}
-        onChange={handleChange}
+        value={instructions}
+        onChange={(e) => setInstructions(e.target.value)}
         placeholder="Instructions"
         required
       />
-      <button type="submit">Save Changes</button>
+      <button type="submit">Update Recipe</button>
     </form>
   );
 }
