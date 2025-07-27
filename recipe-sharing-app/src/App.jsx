@@ -1,19 +1,19 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import RecipeList from './components/RecipeList';
-import RecipeForm from './components/RecipeForm';
-import RecipeDetails from './components/RecipeDetails';
+import AddRecipeForm from './components/AddRecipeForm';
+import EditRecipeForm from './components/EditRecipeForm';
 import FavoritesList from './components/FavoritesList';
 import RecommendationsList from './components/RecommendationsList';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/recipes" element={<RecipeList />} />
-        <Route path="/create" element={<RecipeForm />} />
-        <Route path="/recipes/:id" element={<RecipeDetails />} />
+        <Route path="/add" element={<AddRecipeForm />} />
+        <Route path="/edit/:id" element={<EditRecipeForm />} />
         <Route path="/favorites" element={<FavoritesList />} />
         <Route path="/recommendations" element={<RecommendationsList />} />
       </Routes>
