@@ -4,7 +4,6 @@ import AddRecipeForm from './components/AddRecipeForm';
 import EditRecipeForm from './components/EditRecipeForm';
 import FavoritesList from './components/FavoritesList';
 import RecommendationsList from './components/RecommendationsList';
-import Navbar from './components/Navbar';
 
 function App() {
   return (
