@@ -4,15 +4,19 @@ import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
 import FavoriteButton from './FavoriteButton';
 
+
 function RecipeDetails() {
   const { id } = useParams();
-  const recipe = useRecipeStore((state) =>
-    state.recipes.find((r) => r.id === id)
-  );
+  const favorites = useRecipeStore((state) => state.favorites);
+  const addFavorite = useRecipeStore((state) => state.addFavorite);
+  const removeFavorite = useRecipeStore((state) => state.removeFavorite);
 
-  if (!recipe) return <p>Recipe not found.</p>;
+  const isFavorite = favorites.includes(id);
+
 
   return (
+    <button onClick={() => (isFavorite ? removeFavorite(id) : addFavorite(id))}>
+      {isFavorite ? 'Unfavorite' : 'Favorite'}
     <div>
       <h2>{recipe.title}</h2>
       <p>{recipe.instructions}</p>
