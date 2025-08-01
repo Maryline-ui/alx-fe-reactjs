@@ -5,52 +5,17 @@ export const useRecipeStore = create((set) => ({
   searchTerm: '',
   filterByIngredient: '',
   filterByTime: '',
-  
+
   setSearchTerm: (term) => set({ searchTerm: term }),
   setFilterByIngredient: (ingredient) => set({ filterByIngredient: ingredient }),
   setFilterByTime: (time) => set({ filterByTime: time }),
-  setRecipes: (recipes) => set({ recipes, filteredRecipes: recipes }),
+  setRecipes: (recipes) => set({ recipes }), 
 
-  filteredRecipes: [],
-  filterRecipes: () =>
-    set((state) => ({
-      filteredRecipes: state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) &&
-        recipe.ingredients.toLowerCase().includes(state.filterByIngredient.toLowerCase()) &&
-        recipe.time.toString().includes(state.filterByTime)
-      ),
-    })),
-  
-  addRecipe: (recipe) =>
-    set((state) => {
-      const newRecipe = {
-        ...recipe,
-        id: Date.now().toString(),
-      };
-      return {
-        recipes: [...state.recipes, newRecipe],
-        filteredRecipes: [...state.recipes, newRecipe],
-      };
-    }),
-
-  updateRecipe: (updatedRecipe) =>
-    set((state) => {
-      const updated = state.recipes.map((r) =>
-        r.id === updatedRecipe.id ? updatedRecipe : r
-      );
-      return {
-        recipes: updated,
-        filteredRecipes: updated,
-      };
-    }),
-
-  deleteRecipe: (id) =>
-    set((state) => {
-      const filtered = state.recipes.filter((r) => r.id !== id);
-      return {
-        recipes: filtered,
-        filteredRecipes: filtered,
-      };
-    }),
+  get filteredRecipes() {
+    return this.recipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+      recipe.ingredients.toLowerCase().includes(this.filterByIngredient.toLowerCase()) &&
+      recipe.time.toLowerCase().includes(this.filterByTime.toLowerCase())
+    );
+  },
 }));
-
