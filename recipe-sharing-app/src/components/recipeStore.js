@@ -10,11 +10,12 @@ export const useRecipeStore = create((set) => ({
     set((state) => ({
       recipes: [...state.recipes, newRecipe],
     })),
+   setRecipes: (recipes) => set({ recipes }), 
 
   setSearchTerm: (term) => set({ searchTerm: term }),
   setFilterByIngredient: (ingredient) => set({ filterByIngredient: ingredient }),
   setFilterByTime: (time) => set({ filterByTime: time }),
-  setRecipes: (recipes) => set({ recipes }), 
+  
 
   get filteredRecipes() {
     return this.recipes.filter((recipe) =>
