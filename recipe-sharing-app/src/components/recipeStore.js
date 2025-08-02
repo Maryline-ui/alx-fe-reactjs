@@ -1,30 +1,27 @@
-import { useEffect } from 'react';
-import { useRecipeStore } from './recipeStore';
-import { Link } from 'react-router-dom';
+import { create } from 'zustand';
 
-const RecommendationsList = () => {
-  const { recommendations, generateRecommendations } = useRecipeStore();
+export const useRecipeStore = create((set) => ({
+  recipes: [],
+  searchTerm: '',
+  filterByIngredient: '',
+  filterByTime: '',
+  
+  addRecipe: (newRecipe) =>
+    set((state) => ({
+      recipes: [...state.recipes, newRecipe],
+    })),
 
-  useEffect(() => {
-    generateRecommendations();
-  }, [generateRecommendations]);
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  setFilterByIngredient: (ingredient) => set({ filterByIngredient: ingredient }),
+  setFilterByTime: (time) => set({ filterByTime: time }),
+  setRecipes: (recipes) => set({ recipes }),
 
-  return (
-    <div>
-      <h2>Recommended for You</h2>
-      {recommendations.length === 0 ? (
-        <p>No recommendations yet.</p>
-      ) : (
-        recommendations.map((recipe) => (
-          <div key={recipe.id}>
-            <h3>
-              <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
-            </h3>
-          </div>
-        ))
-      )}
-    </div>
-  );
-};
-
-export default RecommendationsList;
+  
+  get filteredRecipes() {
+    return this.recipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+      recipe.ingredients.toLowerCase().includes(this.filterByIngredient.toLowerCase()) &&
+      recipe.time.toLowerCase().includes(this.filterByTime.toLowerCase())
+    );
+  },
+}));
