@@ -6,6 +6,11 @@ export const useRecipeStore = create((set) => ({
   filterByIngredient: '',
   filterByTime: '',
 
+  addRecipe: (newRecipe) =>
+    set((state) => ({
+      recipes: [...state.recipes, newRecipe],
+    })),
+
   setSearchTerm: (term) => set({ searchTerm: term }),
   setFilterByIngredient: (ingredient) => set({ filterByIngredient: ingredient }),
   setFilterByTime: (time) => set({ filterByTime: time }),
