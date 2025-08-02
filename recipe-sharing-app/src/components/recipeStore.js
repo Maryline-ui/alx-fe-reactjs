@@ -5,6 +5,8 @@ export const useRecipeStore = create((set) => ({
   searchTerm: '',
   filterByIngredient: '',
   filterByTime: '',
+  favorites: [],
+  recommendations: [],
   
   addRecipe: (newRecipe) =>
     set((state) => ({
@@ -15,6 +17,21 @@ export const useRecipeStore = create((set) => ({
   setFilterByIngredient: (ingredient) => set({ filterByIngredient: ingredient }),
   setFilterByTime: (time) => set({ filterByTime: time }),
   setRecipes: (recipes) => set({ recipes }),
+
+  addFavorite: (recipeId) => set((state) => ({
+    favorites: [...state.favorites, recipeId]
+  })),
+
+  removeFavorite: (recipeId) => set((state) => ({
+    favorites: state.favorites.filter(id => id !== recipeId)
+  })),
+
+  generateRecommendations: () => set((state) => {
+    const recommended = state.recipes.filter(recipe =>
+      state.favorites.includes(recipe.id) && Math.random() > 0.5
+    );
+    return { recommendations: recommended };
+  }),
 
   
   get filteredRecipes() {
