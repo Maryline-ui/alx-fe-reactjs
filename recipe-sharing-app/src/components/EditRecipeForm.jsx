@@ -1,58 +1,39 @@
 // src/components/EditRecipeForm.jsx
 import { useState } from 'react';
 import { useRecipeStore } from './recipeStore';
-import { useNavigate } from 'react-router-dom';
 
 function EditRecipeForm({ recipe }) {
-  const editRecipe = useRecipeStore((state) => state.editRecipe);
-  const navigate = useNavigate();
+  const [title, setTitle] = useState(recipe.title);
+  const [instructions, setInstructions] = useState(recipe.instructions);
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
-  const [formData, setFormData] = useState({
-    id: recipe.id,
-    title: recipe.title,
-    ingredients: recipe.ingredients,
-    instructions: recipe.instructions,
-  });
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    editRecipe(formData);
-    navigate(`/recipe/${recipe.id}`);
+    updateRecipe({
+      id: recipe.id,
+      title,
+      instructions,
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h3>Edit Recipe</h3>
       <input
-        name="title"
-        value={formData.title}
-        onChange={handleChange}
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
-        required
       />
+      <br />
       <textarea
-        name="ingredients"
-        value={formData.ingredients}
-        onChange={handleChange}
-        placeholder="Ingredients"
-        required
-      />
-      <textarea
-        name="instructions"
-        value={formData.instructions}
-        onChange={handleChange}
+        value={instructions}
+        onChange={(e) => setInstructions(e.target.value)}
         placeholder="Instructions"
-        required
       />
-      <button type="submit">Save Changes</button>
+      <br />
+      <button type="submit">Update</button>
     </form>
   );
 }
