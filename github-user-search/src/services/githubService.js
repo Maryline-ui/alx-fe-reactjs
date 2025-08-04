@@ -12,7 +12,7 @@ const headers = {
 
 export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(`${BASE_URL}/${username}`, { headers });
+    const response = await axios.get(`https://api.github.com/search/users?q=${query}`, { headers });
     return response.data;
   } catch (error) {
     console.error('GitHub API Error (fetchUserData):', error);
@@ -30,7 +30,7 @@ export const fetchAdvancedUserData = async ({ username, location, minRepos }) =>
     if (minRepos) queryParts.push(`repos:>=${minRepos}`);
 
     const query = queryParts.join('+');
-    const response = await axios.get(`${SEARCH_URL}?q=${query}`, { headers });
+    const response = await axios.get(`https://api.github.com/search/users?q=${query}`, { headers });
 
     return response.data.items; 
   } catch (error) {
