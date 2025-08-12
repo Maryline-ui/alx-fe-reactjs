@@ -4,33 +4,37 @@ import { Link } from 'react-router-dom';
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [steps, setSteps] = useState(''); 
+  const [steps, setSteps] = useState('');
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  
+  const validateForm = () => {
     const newErrors = {};
-
-    
     if (!title.trim()) {
       newErrors.title = 'Recipe title is required.';
     }
     if (!ingredients.trim()) {
       newErrors.ingredients = 'Ingredients are required.';
     }
-    if (!steps.trim()) { 
+    if (!steps.trim()) {
       newErrors.steps = 'Preparation steps are required.';
     }
+    return newErrors;
+  };
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm(); 
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       setSubmitted(false);
     } else {
       setErrors({});
       setSubmitted(true);
       
-      console.log('New recipe submitted:', { title, ingredients, steps }); // Use the new variable
+      console.log('New recipe submitted:', { title, ingredients, steps });
       
       setTitle('');
       setIngredients('');
@@ -85,10 +89,10 @@ const AddRecipeForm = () => {
             <textarea
               id="steps"
               rows="6"
-              value={steps} 
+              value={steps}
               onChange={(e) => setSteps(e.target.value)}
               className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.steps ? 'border-red-500' : 'border-gray-300 focus:ring-blue-500' // Check for new error variable
+                errors.steps ? 'border-red-500' : 'border-gray-300 focus:ring-blue-500'
               }`}
             />
             {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
