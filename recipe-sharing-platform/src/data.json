@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, cured pork, and black pepper.",
+    "image": "https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
+    "image": "https://i.pinimg.com/736x/4d/3e/97/4d3e97528a66a260bbadf2cd9f00faba.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Vegetable Stir-Fry",
+    "summary": "A quick and healthy stir-fry with a variety of fresh vegetables and a savory sauce.",
+    "image": "https://i.pinimg.com/736x/21/64/c9/2164c94cccfc01f2cadde9a5fb666375.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Classic Beef Burger",
+    "summary": "A juicy grilled beef patty served in a toasted bun with fresh lettuce, tomato, and onion.",
+    "image": "https://i.pinimg.com/736x/1a/cf/b8/1acfb88db086cbec7dde3b31a5512e8f.jpg"
+  }
+]
