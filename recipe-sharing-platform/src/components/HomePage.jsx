@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
 import recipesData from '../data.json';
 
 const HomePage = () => {
@@ -11,7 +11,15 @@ const HomePage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center my-8 text-gray-800">Our Recipes</h1>
+      <div className="flex justify-between items-center my-8">
+        <h1 className="text-4xl font-bold text-gray-800">Our Recipes</h1>
+        <Link 
+          to="/add-recipe"
+          className="px-6 py-3 bg-green-500 text-white font-medium rounded-lg shadow-md hover:bg-green-600 transition-colors duration-300"
+        >
+          Add New Recipe
+        </Link>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {recipes.map(recipe => (
           <Link to={`/recipe/${recipe.id}`} key={recipe.id}>
