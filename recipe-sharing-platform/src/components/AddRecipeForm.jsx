@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState(''); 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
@@ -12,14 +12,15 @@ const AddRecipeForm = () => {
     e.preventDefault();
     const newErrors = {};
 
+    
     if (!title.trim()) {
       newErrors.title = 'Recipe title is required.';
     }
     if (!ingredients.trim()) {
       newErrors.ingredients = 'Ingredients are required.';
     }
-    if (!instructions.trim()) {
-      newErrors.instructions = 'Instructions are required.';
+    if (!steps.trim()) { 
+      newErrors.steps = 'Preparation steps are required.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -29,11 +30,11 @@ const AddRecipeForm = () => {
       setErrors({});
       setSubmitted(true);
       
-      console.log('New recipe submitted:', { title, ingredients, instructions });
+      console.log('New recipe submitted:', { title, ingredients, steps }); // Use the new variable
       
       setTitle('');
       setIngredients('');
-      setInstructions('');
+      setSteps('');
     }
   };
 
@@ -78,19 +79,19 @@ const AddRecipeForm = () => {
           </div>
 
           <div>
-            <label htmlFor="instructions" className="block text-lg font-medium text-gray-700 mb-2">
+            <label htmlFor="steps" className="block text-lg font-medium text-gray-700 mb-2">
               Preparation Steps
             </label>
             <textarea
-              id="instructions"
+              id="steps"
               rows="6"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
+              value={steps} 
+              onChange={(e) => setSteps(e.target.value)}
               className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.instructions ? 'border-red-500' : 'border-gray-300 focus:ring-blue-500'
+                errors.steps ? 'border-red-500' : 'border-gray-300 focus:ring-blue-500' // Check for new error variable
               }`}
             />
-            {errors.instructions && <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>}
+            {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
           </div>
 
           <button
