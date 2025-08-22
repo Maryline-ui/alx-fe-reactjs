@@ -1,12 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-export default function RegistrationForm() {
+const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,23 +14,21 @@ export default function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form submitted:", formData);
+
+    // Basic validation check
     if (!formData.username || !formData.email || !formData.password) {
-      setError("All fields are required!");
+      alert("All fields are required!");
       return;
     }
-    setError("");
-    console.log("Form submitted:", formData);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-6 mb-8"
+      className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl space-y-4"
     >
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
-        Controlled Registration Form
-      </h2>
-      {error && <p className="text-red-500 mb-2">{error}</p>}
+      <h2 className="text-2xl font-bold text-center">Register</h2>
 
       <input
         type="text"
@@ -39,7 +36,7 @@ export default function RegistrationForm() {
         placeholder="Username"
         value={formData.username}
         onChange={handleChange}
-        className="w-full p-2 mb-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full p-2 border rounded-lg"
       />
 
       <input
@@ -48,7 +45,7 @@ export default function RegistrationForm() {
         placeholder="Email"
         value={formData.email}
         onChange={handleChange}
-        className="w-full p-2 mb-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full p-2 border rounded-lg"
       />
 
       <input
@@ -57,15 +54,17 @@ export default function RegistrationForm() {
         placeholder="Password"
         value={formData.password}
         onChange={handleChange}
-        className="w-full p-2 mb-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full p-2 border rounded-lg"
       />
 
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+        className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700"
       >
         Register
       </button>
     </form>
   );
-}
+};
+
+export default RegistrationForm;

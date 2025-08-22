@@ -1,3 +1,4 @@
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -9,73 +10,72 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
-export default function FormikForm() {
+const FormikForm = () => {
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
-        Formik Registration Form
-      </h2>
-      <Formik
-        initialValues={{ username: "", email: "", password: "" }}
-        validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          console.log("Formik submitted:", values);
-          resetForm();
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <div className="mb-3">
-              <Field
-                name="username"
-                placeholder="Username"
-                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              />
-              <ErrorMessage
-                name="username"
-                component="div"
-                className="text-red-500 text-sm mt-1"
-              />
-            </div>
+    <Formik
+      initialValues={{ username: "", email: "", password: "" }}
+      validationSchema={validationSchema}
+      onSubmit={(values, { resetForm }) => {
+        console.log("Formik form submitted:", values);
+        resetForm();
+      }}
+    >
+      {() => (
+        <Form className="max-w-md mx-auto p-6 bg-gray-50 shadow-lg rounded-2xl space-y-4">
+          <h2 className="text-2xl font-bold text-center">Formik Register</h2>
 
-            <div className="mb-3">
-              <Field
-                type="email"
-                name="email"
-                placeholder="Email"
-                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="text-red-500 text-sm mt-1"
-              />
-            </div>
+          <div>
+            <Field
+              type="text"
+              name="username"
+              placeholder="Username"
+              className="w-full p-2 border rounded-lg"
+            />
+            <ErrorMessage
+              name="username"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
 
-            <div className="mb-3">
-              <Field
-                type="password"
-                name="password"
-                placeholder="Password"
-                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="text-red-500 text-sm mt-1"
-              />
-            </div>
+          <div>
+            <Field
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="w-full p-2 border rounded-lg"
+            />
+            <ErrorMessage
+              name="email"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition"
-            >
-              {isSubmitting ? "Submitting..." : "Register"}
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+          <div>
+            <Field
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="w-full p-2 border rounded-lg"
+            />
+            <ErrorMessage
+              name="password"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white p-2 rounded-lg hover:bg-green-700"
+          >
+            Register with Formik
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
-}
+};
+
+export default FormikForm;

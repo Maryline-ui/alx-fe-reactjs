@@ -1,9 +1,12 @@
+import React from "react";
+import RegistrationForm from "./components/RegistrationForm";
+import FormikForm from "./components/FormikForm";
+
 function App() {
   return (
-    <div className="text-center mt-10">
-      <h1 className="text-3xl font-bold text-blue-600">
-        Tailwind is Working 🚀
-      </h1>
+    <div className="min-h-screen flex flex-col items-center justify-center space-y-10 bg-gray-100">
+      <RegistrationForm />
+      <FormikForm />
     </div>
   );
 }
