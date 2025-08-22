@@ -7,8 +7,7 @@ const RegistrationForm = () => {
     password: "",
   });
 
-  
-  const { username, email, password } = formData;
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,12 +17,23 @@ const RegistrationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
-      alert("All fields are required!");
-      return;
+    let newErrors = {};
+
+    if (!formData.username) {
+      newErrors.username = "Username is required";
+    }
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
     }
 
-    console.log("Form submitted:", formData);
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Form submitted:", formData);
+    }
   };
 
   return (
@@ -37,28 +47,35 @@ const RegistrationForm = () => {
         type="text"
         name="username"
         placeholder="Username"
-        value={username}   
+        value={formData.username}
         onChange={handleChange}
         className="w-full p-2 border rounded-lg"
       />
+      {errors.username && (
+        <p className="text-red-500 text-sm">{errors.username}</p>
+      )}
 
       <input
         type="email"
         name="email"
         placeholder="Email"
-        value={email}   
+        value={formData.email}
         onChange={handleChange}
         className="w-full p-2 border rounded-lg"
       />
+      {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
       <input
         type="password"
         name="password"
         placeholder="Password"
-        value={password}   
+        value={formData.password}
         onChange={handleChange}
         className="w-full p-2 border rounded-lg"
       />
+      {errors.password && (
+        <p className="text-red-500 text-sm">{errors.password}</p>
+      )}
 
       <button
         type="submit"
