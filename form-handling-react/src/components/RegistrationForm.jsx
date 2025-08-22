@@ -14,13 +14,8 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-
-    // Basic validation check
-    if (!formData.username || !formData.email || !formData.password) {
-      alert("All fields are required!");
-      return;
-    }
+    console.log("Controlled form submitted:", formData);
+    setFormData({ username: "", email: "", password: "" });
   };
 
   return (
@@ -28,34 +23,40 @@ const RegistrationForm = () => {
       onSubmit={handleSubmit}
       className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl space-y-4"
     >
-      <h2 className="text-2xl font-bold text-center">Register</h2>
+      <h2 className="text-2xl font-bold text-center">Controlled Register</h2>
 
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        value={formData.username}
-        onChange={handleChange}
-        className="w-full p-2 border rounded-lg"
-      />
+      <div>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          placeholder="Username"
+          className="w-full p-2 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-        className="w-full p-2 border rounded-lg"
-      />
+      <div>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+          className="w-full p-2 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={handleChange}
-        className="w-full p-2 border rounded-lg"
-      />
+      <div>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Password"
+          className="w-full p-2 border rounded-lg"
+        />
+      </div>
 
       <button
         type="submit"
