@@ -7,6 +7,9 @@ const RegistrationForm = () => {
     password: "",
   });
 
+  
+  const { username, email, password } = formData;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -14,8 +17,13 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Controlled form submitted:", formData);
-    setFormData({ username: "", email: "", password: "" });
+
+    if (!username || !email || !password) {
+      alert("All fields are required!");
+      return;
+    }
+
+    console.log("Form submitted:", formData);
   };
 
   return (
@@ -23,40 +31,34 @@ const RegistrationForm = () => {
       onSubmit={handleSubmit}
       className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl space-y-4"
     >
-      <h2 className="text-2xl font-bold text-center">Controlled Register</h2>
+      <h2 className="text-2xl font-bold text-center">Register</h2>
 
-      <div>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          placeholder="Username"
-          className="w-full p-2 border rounded-lg"
-        />
-      </div>
+      <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        value={username}   
+        onChange={handleChange}
+        className="w-full p-2 border rounded-lg"
+      />
 
-      <div>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          className="w-full p-2 border rounded-lg"
-        />
-      </div>
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={email}   
+        onChange={handleChange}
+        className="w-full p-2 border rounded-lg"
+      />
 
-      <div>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
-          className="w-full p-2 border rounded-lg"
-        />
-      </div>
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={password}   
+        onChange={handleChange}
+        className="w-full p-2 border rounded-lg"
+      />
 
       <button
         type="submit"

@@ -2,12 +2,11 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+// Yup validation schema
 const validationSchema = Yup.object({
   username: Yup.string().required("Username is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
 });
 
 const FormikForm = () => {
@@ -15,14 +14,13 @@ const FormikForm = () => {
     <Formik
       initialValues={{ username: "", email: "", password: "" }}
       validationSchema={validationSchema}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={(values) => {
         console.log("Formik form submitted:", values);
-        resetForm();
       }}
     >
       {() => (
-        <Form className="max-w-md mx-auto p-6 bg-gray-50 shadow-lg rounded-2xl space-y-4">
-          <h2 className="text-2xl font-bold text-center">Formik Register</h2>
+        <Form className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl space-y-4">
+          <h2 className="text-2xl font-bold text-center">Register with Formik</h2>
 
           <div>
             <Field
@@ -33,7 +31,7 @@ const FormikForm = () => {
             />
             <ErrorMessage
               name="username"
-              component="p"
+              component="div"
               className="text-red-500 text-sm"
             />
           </div>
@@ -47,7 +45,7 @@ const FormikForm = () => {
             />
             <ErrorMessage
               name="email"
-              component="p"
+              component="div"
               className="text-red-500 text-sm"
             />
           </div>
@@ -61,7 +59,7 @@ const FormikForm = () => {
             />
             <ErrorMessage
               name="password"
-              component="p"
+              component="div"
               className="text-red-500 text-sm"
             />
           </div>
@@ -70,7 +68,7 @@ const FormikForm = () => {
             type="submit"
             className="w-full bg-green-600 text-white p-2 rounded-lg hover:bg-green-700"
           >
-            Register with Formik
+            Register
           </button>
         </Form>
       )}
