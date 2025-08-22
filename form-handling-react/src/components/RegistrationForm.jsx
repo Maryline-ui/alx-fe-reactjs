@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const RegistrationForm = () => {
-  // Use a single state object to manage all form fields, which is a common pattern.
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -9,11 +8,9 @@ const RegistrationForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Update the state for the specific input field that changed.
     setFormData({ ...formData, [name]: value });
   };
 
@@ -35,9 +32,8 @@ const RegistrationForm = () => {
 
     if (Object.keys(newErrors).length === 0) {
       console.log("Form submitted:", formData);
-      setMessage("Success! Form submitted correctly.");
-    } else {
-      setMessage("Please correct the errors in the form.");
+      // This is a mock API call to simulate a real submission
+      alert("Registration successful with controlled components!");
     }
   };
 
@@ -46,10 +42,10 @@ const RegistrationForm = () => {
       onSubmit={handleSubmit}
       className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl space-y-4"
     >
-      <h2 className="text-2xl font-bold text-center">Register</h2>
+      <h2 className="text-2xl font-bold text-center">Register with Controlled Components</h2>
 
       <div>
-        {/* We need to add value and onChange props here */}
+        <label className="block text-sm font-medium text-gray-700">Username</label>
         <input
           type="text"
           name="username"
@@ -64,7 +60,7 @@ const RegistrationForm = () => {
       </div>
 
       <div>
-        {/* We need to add value and onChange props here */}
+        <label className="block text-sm font-medium text-gray-700">Email</label>
         <input
           type="email"
           name="email"
@@ -77,7 +73,7 @@ const RegistrationForm = () => {
       </div>
 
       <div>
-        {/* We need to add value and onChange props here */}
+        <label className="block text-sm font-medium text-gray-700">Password</label>
         <input
           type="password"
           name="password"
@@ -97,10 +93,6 @@ const RegistrationForm = () => {
       >
         Register
       </button>
-
-      {message && (
-        <p className="text-center text-sm font-medium text-gray-600">{message}</p>
-      )}
     </form>
   );
 };
