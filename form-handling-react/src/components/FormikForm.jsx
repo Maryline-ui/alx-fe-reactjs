@@ -10,9 +10,7 @@ const FormikForm = () => {
   });
 
   const handleSubmit = (values) => {
-    // Mock API call
     console.log('Formik form submitted:', values);
-    alert('Registration successful with Formik!');
   };
 
   return (
