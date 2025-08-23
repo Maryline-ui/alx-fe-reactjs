@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RegistrationForm from './components/RegistrationForm';
-import FormikForm from './components/FormikForm'; // <--- Change this line
+import FormikForm from './components/FormikForm';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './index.css';
 
-function App() {
+const App = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4 space-y-8 font-sans antialiased">
@@ -17,6 +17,6 @@ function App() {
       </div>
     </DndProvider>
   );
-}
+};
 
 export default App;
