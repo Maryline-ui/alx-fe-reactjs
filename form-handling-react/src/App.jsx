@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RegistrationForm from './components/RegistrationForm';
 import FormikForm from './components/FormikForm';
 import { DndProvider } from 'react-dnd';
