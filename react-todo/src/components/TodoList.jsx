@@ -1,38 +1,17 @@
 import React, { useState } from 'react';
 
-// AddTodoForm component
-const AddTodoForm = ({ onAdd }) => {
-  const [text, setText] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (text.trim() === '') return;
-    onAdd(text);
-    setText('');
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Add todo"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button type="submit">Add</button>
-    </form>
-  );
-};
-
-// TodoList component
 const TodoList = () => {
   const [todos, setTodos] = useState([
     { text: 'Learn React', completed: false },
     { text: 'Write Tests', completed: false },
   ]);
 
-  const addTodo = (text) => {
-    setTodos([...todos, { text, completed: false }]);
+  const [input, setInput] = useState('');
+
+  const addTodo = () => {
+    if (!input.trim()) return;
+    setTodos([...todos, { text: input, completed: false }]);
+    setInput('');
   };
 
   const toggleTodo = (index) => {
@@ -48,17 +27,23 @@ const TodoList = () => {
   return (
     <div>
       <h1>Todo List</h1>
-      <AddTodoForm onAdd={addTodo} />
+      <input
+        type="text"
+        placeholder="Add todo"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={addTodo}>Add</button>
       <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
+        {todos.map((todo, i) => (
+          <li key={i}>
             <span
               style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-              onClick={() => toggleTodo(index)}
+              onClick={() => toggleTodo(i)}
             >
               {todo.text}
             </span>
-            <button onClick={() => deleteTodo(index)}>Delete</button>
+            <button onClick={() => deleteTodo(i)}>Delete</button>
           </li>
         ))}
       </ul>
